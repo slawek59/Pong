@@ -4,6 +4,7 @@
 <body>
     <canvas id="gameCanvas" width="800" height="500" style="border: 1px solid" />
     <script>
+
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -35,6 +36,26 @@
 
         drawPaddle(770, 100);
         drawPaddle(10, 300);
+
+        const CANVAS_HEIGHT = canvas.height;
+        const CANVAS_WIDTH = canvas.width;
+
+        const BOARD_Y = 50;
+        const BOARD_P1_X = 300;
+        const BOARD_P2_X = 500;
+
+        const PADDLE_WIDTH = 20;
+        const PADDLE_HEIGHT = 100;
+        const PADDLE_P1_X = 10;
+        const PADDLE_P2_X = 770;
+        const PADDLE_START_Y = (CANVAS_HEIGHT - PADDLE_HEIGHT) / 2;
+
+        const BALL_R = 15;
+        const BALL_START_X = CANVAS_WIDTH / 2;
+        const BALL_START_Y = CANVAS_HEIGHT / 2;
+        const BALL_START_DX = 4.5;
+        const BALL_START_DY = 1.5;
+
     </script>
 </body>
 
