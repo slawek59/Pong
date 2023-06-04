@@ -29,6 +29,8 @@
 
         const STATE_CHANGE_INTERVAL = 20;
 
+        const PADDLE_STEP = 3;
+
         ctx.font = '30px Arial';
 
         function drawPaddle(x, y) {
@@ -63,7 +65,7 @@
         let ballDX = BALL_START_DX;
         let ballDY = BALL_START_DY;
         let p1PaddleY = PADDLE_START_Y;
-        let p2Paddley = PADDLE_START_Y;
+        let p2PaddleY = PADDLE_START_Y;
         let p1Points = 0;
         let p2Points = 0;
 
@@ -73,7 +75,7 @@
             drawPoints(p2Points.toString(), BOARD_P2_X);
             drawBall(ballX, ballY);
             drawPaddle(PADDLE_P1_X, p1PaddleY);
-            drawPaddle(PADDLE_P2_X, p2Paddley);
+            drawPaddle(PADDLE_P2_X, p2PaddleY);
         }
 
         function updateState() {
@@ -81,7 +83,7 @@
             ballY = ballDY;
 
             p1PaddleY++;
-            p2Paddley--;
+            p2PaddleY--;
             p1Points++;
             p2Points += 3;
         }
@@ -92,6 +94,51 @@
         }
 
         setInterval(updateAndDrewState, STATE_CHANGE_INTERVAL);
+
+        let p1Action = 'stop';
+        let p2Action = 'stop';
+
+        // window.addEventListener('keydown', function (event) {
+        //     const code = event.code;
+        //     if (code === 'KeyQ') {
+        //         p1PaddleY -= PADDLE_STEP;
+        //     } else if (code === 'KeyA') {
+        //         p1PaddleY += PADDLE_STEP;
+        //     } else if (code === 'KeyP') {
+        //         p2PaddleY -= PADDLE_STEP;
+        //     } else if (code === 'KeyL') {
+        //         p2PaddleY += PADDLE_STEP;
+        //     }
+        // });
+
+        window.addEventListener('keydown', function (event) {
+            const code = event.code;
+            if (code === 'KeyQ') {
+                p1Action = 'up';
+            } else if (code === 'KeyA') {
+                p1Action = 'down';
+            } else if (code === 'KeyP') {
+                p2Action = 'up';
+            } else if (code === 'KeyL') {
+                p2Action = 'down';
+            }
+        });
+
+        function updateState() {
+            if (p1Action === 'up') {
+                p1PaddleY -= PADDLE_STEP;
+            } else if (p1Action === 'down') {
+                p1PaddleY += PADDLE_STEP;
+            }
+            if (p2Action === 'up') {
+                p2PaddleY -= PADDLE_STEP;
+            } else if (p2Action === 'down') {
+                p2PaddleY += PADDLE_STEP;
+            }
+
+            ballX += ballDX;
+            ballY += ballDY;
+        };
 
     </script>
 </body>
