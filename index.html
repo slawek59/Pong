@@ -31,6 +31,18 @@
 
         const PADDLE_STEP = 3;
 
+        const P1_UP_BUTTON = 'KeyQ';
+        const P1_DOWN_BUTTON = 'KeyA';
+        const P2_UP_BUTTON = 'KeyP';
+        const P2_DOWN_BUTTON = 'KeyL';
+
+        const UP_ACTION = 'up';
+        const DOWN_ACTION = 'down';
+        const STOP_ACTION = 'stop';
+
+        let p1Action = STOP_ACTION;
+        let p2Action = STOP_ACTION;
+
         ctx.font = '30px Arial';
 
         function drawPaddle(x, y) {
@@ -95,8 +107,8 @@
 
         setInterval(updateAndDrewState, STATE_CHANGE_INTERVAL);
 
-        let p1Action = 'stop';
-        let p2Action = 'stop';
+        // let p1Action = 'stop';
+        // let p2Action = 'stop';
 
         // window.addEventListener('keydown', function (event) {
         //     const code = event.code;
@@ -111,34 +123,89 @@
         //     }
         // });
 
+        // window.addEventListener('keydown', function (event) {
+        //     const code = event.code;
+        //     if (code === 'KeyQ') {
+        //         p1Action = 'up';
+        //     } else if (code === 'KeyA') {
+        //         p1Action = 'down';
+        //     } else if (code === 'KeyP') {
+        //         p2Action = 'up';
+        //     } else if (code === 'KeyL') {
+        //         p2Action = 'down';
+        //     }
+        // });
+
         window.addEventListener('keydown', function (event) {
             const code = event.code;
-            if (code === 'KeyQ') {
-                p1Action = 'up';
-            } else if (code === 'KeyA') {
-                p1Action = 'down';
-            } else if (code === 'KeyP') {
-                p2Action = 'up';
-            } else if (code === 'KeyL') {
-                p2Action = 'down';
+            if (code === P1_UP_BUTTON) {
+                p1Action = UP_ACTION;
+            } else if (code === P1_DOWN_BUTTON) {
+                p1Action = DOWN_ACTION;
+            } else if (code === P2_UP_BUTTON) {
+                p2Action = UP_ACTION;
+            } else if (code === P2_DOWN_BUTTON) {
+                p2Action = DOWN_ACTION;
             }
         });
 
-        function updateState() {
-            if (p1Action === 'up') {
+        // window.addEventListener('keyup', function (event) {
+        //     const code = event.code;
+        //     if (code === P1_UP_BUTTON && p1Action === UP_ACTION) {
+        //         p1Action = STOP_ACTION;
+        //     } else if (code === P1_DOWN_BUTTON && p1Action === DOWN_ACTION) {
+        //         p1Action = STOP_ACTION;
+        //     } else if (code === P2_UP_BUTTON && p2Action === UP_ACTION) {
+        //         p2Action = STOP_ACTION;
+        //     } else if (code === P2_DOWN_BUTTON && p2Action === DOWN_ACTION) {
+        //         p2Action = STOP_ACTION;
+        //     }
+        // });
+
+        window.addEventListener('keyup', function (event) {
+            let code = event.code;
+            if ((code === P1_UP_BUTTON && p1Action === UP_ACTION) || (code === P1_DOWN_BUTTON && p1Action === DOWN_ACTION)) {
+                p1Action = STOP_ACTION;
+            } else if ((code === P2_UP_BUTTON && p2Action === UP_ACTION) || (code === P2_DOWN_BUTTON && p2Action === DOWN_ACTION)) {
+                p2Action = STOP_ACTION;
+            }
+        })
+
+        function movePaddles() {
+            if (p1Action === UP_ACTION) {
                 p1PaddleY -= PADDLE_STEP;
-            } else if (p1Action === 'down') {
+            } else if (p1Action === DOWN_ACTION) {
                 p1PaddleY += PADDLE_STEP;
             }
-            if (p2Action === 'up') {
+            if (p2Action === UP_ACTION) {
                 p2PaddleY -= PADDLE_STEP;
-            } else if (p2Action === 'down') {
+            } else if (p2Action === DOWN_ACTION) {
                 p2PaddleY += PADDLE_STEP;
             }
+        }
+
+        // function updateState() {
+        //     if (p1Action === 'up') {
+        //         p1PaddleY -= PADDLE_STEP;
+        //     } else if (p1Action === 'down') {
+        //         p1PaddleY += PADDLE_STEP;
+        //     }
+        //     if (p2Action === 'up') {
+        //         p2PaddleY -= PADDLE_STEP;
+        //     } else if (p2Action === 'down') {
+        //         p2PaddleY += PADDLE_STEP;
+        //     }
+
+        //     ballX += ballDX;
+        //     ballY += ballDY;
+        // };
+
+        function updateState() {
+            movePaddles();
 
             ballX += ballDX;
             ballY += ballDY;
-        };
+        }
 
     </script>
 </body>
