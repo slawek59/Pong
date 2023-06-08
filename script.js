@@ -130,27 +130,9 @@ window.addEventListener("keyup", function (event) {
 	}
 });
 
-// if (ballIsOutsideOnLeft()) {
-//     moveBallToStart();
-//     p2Points++;
-// } else if (ballIsOutsideOnRight()) {
-//     moveBallToStart();
-//     p1Points++;
-// }
-
 function coerceIn(value, min, max) {
 	return Math.max(Math.min(value, max), min);
 }
-
-// function coerceIn(value, min, max) {
-//     if (value <= min) {
-//         return min;
-//     } else if (value >= max) {
-//         return max;
-//     } else {
-//         return value;
-//     }
-// }
 
 function coercePaddle(paddleY) {
 	const minPaddleY = 0;
